@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #F7EFE2;
+  background-image: radial-gradient(
+      circle at 15% -10%,
+      rgba(232, 162, 61, 0.18),
+      transparent 45%
+    ),
+    radial-gradient(circle at 110% 10%, rgba(168, 83, 30, 0.16), transparent 40%);
+  color: #3E2615;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+/* Respect iOS safe areas for the bottom tab bar */
+.safe-bottom {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 0.5rem);
+}
+
+@keyframes popin {
+  0% {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.animate-popin {
+  animation: popin 0.18s ease-out;
+}
+
+@keyframes floatup {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-28px);
+    opacity: 0;
+  }
+}
+.animate-floatup {
+  animation: floatup 0.7s ease-out forwards;
+}
+
+/* Flip card */
+.flip {
+  perspective: 1200px;
+}
+.flip-inner {
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+.flip-inner.flipped {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+}

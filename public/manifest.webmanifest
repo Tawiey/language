@@ -1,0 +1,17 @@
+{
+  "name": "PhraseDuel",
+  "short_name": "PhraseDuel",
+  "description": "Learn each other's language, one friendly duel at a time.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F7EFE2",
+  "theme_color": "#C8821E",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
