@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import type { useHousehold } from "../lib/useHousehold";
+import type { usePresence } from "../lib/usePresence";
 import type { Player } from "../lib/types";
 
 type Store = ReturnType<typeof useHousehold>;
+type Presence = ReturnType<typeof usePresence>;
 
 function FloatScore({ id }: { id: number }) {
   return (
@@ -20,9 +22,11 @@ function FloatScore({ id }: { id: number }) {
 function PlayerCard({
   store,
   player,
+  online,
 }: {
   store: Store;
   player: Player;
+  online: boolean;
 }) {
   const hh = store.household!;
   const name = player === 1 ? hh.p1_name : hh.p2_name;
@@ -61,9 +65,17 @@ function PlayerCard({
           <FloatScore key={id} id={id} />
         ))}
       </div>
-      <div className="mt-1 truncate text-lg font-semibold">{name}</div>
+      <div className="mt-1 flex items-center gap-1.5">
+        <span
+          className={`h-2 w-2 shrink-0 rounded-full ${
+            online ? "bg-green-300 shadow-[0_0_6px] shadow-green-300" : "bg-cream/25"
+          }`}
+          title={online ? "online now" : "offline"}
+        />
+        <span className="truncate text-lg font-semibold">{name}</span>
+      </div>
       <div className="text-xs uppercase tracking-wide text-cream/60">
-        learning {lang}
+        {online ? "online now" : `learning ${lang}`}
       </div>
 
       <div className="mt-3 grid grid-cols-2 gap-2">
@@ -90,7 +102,13 @@ function PlayerCard({
   );
 }
 
-export default function Scoreboard({ store }: { store: Store }) {
+export default function Scoreboard({
+  store,
+  presence,
+}: {
+  store: Store;
+  presence: Presence;
+}) {
   const hh = store.household!;
   const [jarPulse, setJarPulse] = useState(false);
 
@@ -129,8 +147,8 @@ export default function Scoreboard({ store }: { store: Store }) {
 
       {/* Player cards */}
       <div className="flex gap-3">
-        <PlayerCard store={store} player={1} />
-        <PlayerCard store={store} player={2} />
+        <PlayerCard store={store} player={1} online={presence.p1Online} />
+        <PlayerCard store={store} player={2} online={presence.p2Online} />
       </div>
 
       <p className="px-1 text-center text-xs text-cocoa/50">

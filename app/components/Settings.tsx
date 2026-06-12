@@ -2,13 +2,21 @@
 
 import { useState } from "react";
 import type { useHousehold } from "../lib/useHousehold";
-import type { Language } from "../lib/types";
+import type { Language, Player } from "../lib/types";
 
 type Store = ReturnType<typeof useHousehold>;
 
 const LANGS: Language[] = ["Shona", "Setswana"];
 
-export default function Settings({ store }: { store: Store }) {
+export default function Settings({
+  store,
+  me,
+  onSetMe,
+}: {
+  store: Store;
+  me: Player;
+  onSetMe: (p: Player) => void;
+}) {
   const hh = store.household!;
   const [p1Name, setP1Name] = useState(hh.p1_name);
   const [p2Name, setP2Name] = useState(hh.p2_name);
@@ -72,6 +80,27 @@ export default function Settings({ store }: { store: Store }) {
         >
           {saved ? "Saved ✓" : "Save"}
         </button>
+      </div>
+
+      {/* Which player is this phone */}
+      <div className="rounded-2xl bg-white/70 p-4 shadow-card">
+        <div className="font-semibold text-cocoa">This phone is</div>
+        <div className="mt-2 flex gap-2">
+          {([1, 2] as Player[]).map((p) => (
+            <button
+              key={p}
+              onClick={() => onSetMe(p)}
+              className={`flex-1 rounded-lg py-2 text-sm font-semibold ${
+                me === p ? "bg-clay text-cream" : "bg-cream/60 text-cocoa/60"
+              }`}
+            >
+              {p === 1 ? hh.p1_name : hh.p2_name}
+            </button>
+          ))}
+        </div>
+        <p className="mt-2 text-xs text-cocoa/50">
+          Sets who shows as &ldquo;here&rdquo; when you&apos;re both online.
+        </p>
       </div>
 
       {/* English jar controls */}
