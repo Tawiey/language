@@ -33,7 +33,7 @@ export function useHousehold() {
       const [{ data: hh, error: hhErr }, { data: ph, error: phErr }] =
         await Promise.all([
           supabase.from("household").select("*").eq("id", HOUSEHOLD_ID).single(),
-          supabase.from("phrases").select("*").order("created_at", { ascending: true }),
+          supabase.from("phrases").select("*").order("created_at", { ascending: false }),
         ]);
       if (hhErr) throw hhErr;
       if (phErr) throw phErr;
@@ -73,7 +73,7 @@ export function useHousehold() {
             if (payload.eventType === "INSERT") {
               const row = payload.new as Phrase;
               if (prev.some((p) => p.id === row.id)) return prev;
-              return [...prev, row];
+              return [row, ...prev];
             }
             if (payload.eventType === "UPDATE") {
               const row = payload.new as Phrase;
