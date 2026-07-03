@@ -19,7 +19,12 @@ export interface Phrase {
   english: string;
   shona: string;
   setswana: string;
+  shona_audio: string | null;
+  setswana_audio: string | null;
   created_at: string;
 }
 
 export type Player = 1 | 2;
+
+// Column name for a language's audio note.
+export type AudioField = "shona_audio" | "setswana_audio";

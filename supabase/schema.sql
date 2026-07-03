@@ -18,11 +18,13 @@ create table if not exists public.household (
 );
 
 create table if not exists public.phrases (
-  id          uuid primary key default gen_random_uuid(),
-  english     text not null,
-  shona       text not null default '',
-  setswana    text not null default '',
-  created_at  timestamptz not null default now()
+  id             uuid primary key default gen_random_uuid(),
+  english        text not null,
+  shona          text not null default '',
+  setswana       text not null default '',
+  shona_audio    text,
+  setswana_audio text,
+  created_at     timestamptz not null default now()
 );
 
 -- 2. Open access (single shared household, no per-user auth) -----------------
@@ -43,6 +45,26 @@ create policy "open phrases" on public.phrases
 
 alter publication supabase_realtime add table public.household;
 alter publication supabase_realtime add table public.phrases;
+
+-- 3b. Storage bucket for voice notes ----------------------------------------
+
+insert into storage.buckets (id, name, public)
+values ('phrase-audio', 'phrase-audio', true)
+on conflict (id) do update set public = true;
+
+drop policy if exists "phrase-audio read"   on storage.objects;
+drop policy if exists "phrase-audio insert" on storage.objects;
+drop policy if exists "phrase-audio update" on storage.objects;
+drop policy if exists "phrase-audio delete" on storage.objects;
+
+create policy "phrase-audio read" on storage.objects
+  for select using (bucket_id = 'phrase-audio');
+create policy "phrase-audio insert" on storage.objects
+  for insert with check (bucket_id = 'phrase-audio');
+create policy "phrase-audio update" on storage.objects
+  for update using (bucket_id = 'phrase-audio') with check (bucket_id = 'phrase-audio');
+create policy "phrase-audio delete" on storage.objects
+  for delete using (bucket_id = 'phrase-audio');
 
 -- 4. Seed the household (change the passcode to whatever you like!) ----------
 

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import type { useHousehold } from "../lib/useHousehold";
 import type { Phrase } from "../lib/types";
+import PlayButton from "./PlayButton";
 
 type Store = ReturnType<typeof useHousehold>;
 
@@ -113,6 +114,10 @@ export default function Duel({ store }: { store: Store }) {
 
       {revealed ? (
         <div className="space-y-2 animate-popin">
+          <div className="flex justify-center gap-2">
+            <PlayButton url={current?.shona_audio ?? null} label="Shona" />
+            <PlayButton url={current?.setswana_audio ?? null} label="Setswana" />
+          </div>
           <p className="text-center text-sm font-semibold text-cocoa/70">
             Who got it right?
           </p>
