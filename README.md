@@ -17,6 +17,11 @@ both phones via Supabase.
   translations, award the point to whoever got it right.
 - **Live presence** — a status pill shows when you're *both* on the app
   together, with online dots on each player.
+- **Voice notes** — record a spoken clip for each language on any phrase
+  (stored in Supabase Storage as cross-platform WAV); play them back on the
+  Phrases tab or during a Duel reveal. Run
+  [`supabase/migration-voice-notes.sql`](supabase/migration-voice-notes.sql)
+  once to enable.
 
 ## Tech stack
 

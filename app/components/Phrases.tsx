@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { useHousehold } from "../lib/useHousehold";
 import type { Phrase } from "../lib/types";
+import VoiceNote from "./VoiceNote";
 
 type Store = ReturnType<typeof useHousehold>;
 
@@ -94,6 +95,28 @@ function PhraseRow({
             Delete
           </button>
         </div>
+      </div>
+
+      {/* Voice notes for each language */}
+      <div className="mt-3 border-t border-cocoa/10 pt-2">
+        <VoiceNote
+          phraseId={phrase.id}
+          lang="shona"
+          label="Shona"
+          color="text-clay"
+          url={phrase.shona_audio}
+          onSave={(u) => store.updatePhrase(phrase.id, { shona_audio: u })}
+          onClear={() => store.updatePhrase(phrase.id, { shona_audio: null })}
+        />
+        <VoiceNote
+          phraseId={phrase.id}
+          lang="setswana"
+          label="Setswana"
+          color="text-leaf"
+          url={phrase.setswana_audio}
+          onSave={(u) => store.updatePhrase(phrase.id, { setswana_audio: u })}
+          onClear={() => store.updatePhrase(phrase.id, { setswana_audio: null })}
+        />
       </div>
     </div>
   );
