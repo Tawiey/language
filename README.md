@@ -22,6 +22,8 @@ both phones via Supabase.
   Phrases tab or during a Duel reveal. Run
   [`supabase/migration-voice-notes.sql`](supabase/migration-voice-notes.sql)
   once to enable.
+- **Dark mode** — Light / Dark / Auto (follows the phone's system theme),
+  chosen in Settings; warm palette in both.
 
 ## Tech stack
 

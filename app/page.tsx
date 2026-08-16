@@ -44,10 +44,10 @@ export default function Page() {
     return (
       <main className="min-h-dvh grid place-items-center">
         <div className="text-center">
-          <div className="font-display text-3xl text-cocoa animate-pulse">
+          <div className="font-display text-3xl text-ink animate-pulse">
             PhraseDuel
           </div>
-          <p className="mt-2 text-sm text-cocoa/60">Loading your household…</p>
+          <p className="mt-2 text-sm text-ink/60">Loading your household…</p>
         </div>
       </main>
     );
@@ -58,7 +58,7 @@ export default function Page() {
       <main className="min-h-dvh grid place-items-center p-6">
         <div className="max-w-sm text-center">
           <div className="font-display text-2xl text-berry">Couldn&apos;t connect</div>
-          <p className="mt-2 text-sm text-cocoa/70">
+          <p className="mt-2 text-sm text-ink/70">
             The database is reachable but the household data hasn&apos;t been set
             up yet. Make sure you ran the seed SQL in Supabase.
           </p>
@@ -99,12 +99,12 @@ export default function Page() {
     <main className="mx-auto min-h-dvh w-full max-w-md pb-28">
       <header className="px-5 pt-6 pb-2">
         <div className="flex items-start justify-between gap-3">
-          <h1 className="font-display text-3xl font-black tracking-tight text-cocoa">
+          <h1 className="font-display text-3xl font-black tracking-tight text-ink">
             Phrase<span className="text-ochre">Duel</span>
           </h1>
           <PresencePill bothOnline={presence.bothOnline} otherName={otherName} otherOnline={otherOnline} />
         </div>
-        <p className="text-sm text-cocoa/60">
+        <p className="text-sm text-ink/60">
           You&apos;re <span className="font-semibold text-clay">{myName}</span> · learning{" "}
           {me === 1 ? hh.p1_lang : hh.p2_lang}
         </p>
@@ -143,7 +143,7 @@ function PresencePill({
     );
   }
   return (
-    <span className="flex shrink-0 items-center gap-1.5 rounded-full bg-cocoa/10 px-3 py-1.5 text-xs font-semibold text-cocoa/50">
+    <span className="flex shrink-0 items-center gap-1.5 rounded-full bg-cocoa/10 px-3 py-1.5 text-xs font-semibold text-ink/50">
       <span className={`h-2 w-2 rounded-full ${otherOnline ? "bg-leaf" : "bg-cocoa/30"}`} />
       {otherOnline ? `${otherName} is here` : `Waiting for ${otherName}`}
     </span>

@@ -56,7 +56,11 @@ export default function VoiceNote({
           if (url) deletePhraseAudioByUrl(url).catch(() => {});
           onSave(publicUrl);
         } catch (e: any) {
-          setErr("Couldn't save recording.");
+          // Surface the real reason — usually a missing storage bucket/policy
+          // (run supabase/migration-voice-notes.sql) or a mic/codec issue.
+          const msg = e?.message || e?.error_description || String(e);
+          console.error("Voice note save failed:", e);
+          setErr(msg.slice(0, 120));
         } finally {
           setStatus("idle");
           setSeconds(0);
@@ -119,7 +123,7 @@ export default function VoiceNote({
           Stop · {seconds}s
         </button>
       ) : status === "processing" ? (
-        <span className="rounded-full bg-cocoa/10 px-3 py-1.5 text-xs font-semibold text-cocoa/60">
+        <span className="rounded-full bg-cocoa/10 px-3 py-1.5 text-xs font-semibold text-ink/60">
           Saving…
         </span>
       ) : url ? (
@@ -132,7 +136,7 @@ export default function VoiceNote({
           </button>
           <button
             onClick={startRecording}
-            className="rounded-full border border-cocoa/20 px-2.5 py-1.5 text-xs font-semibold text-cocoa/60 active:translate-y-0.5"
+            className="rounded-full border border-hair/20 px-2.5 py-1.5 text-xs font-semibold text-ink/60 active:translate-y-0.5"
             title="Re-record"
           >
             ↻
