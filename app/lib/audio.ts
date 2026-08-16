@@ -65,17 +65,33 @@ function encodeWav(buffer: AudioBuffer): Blob {
   return new Blob([view], { type: "audio/wav" });
 }
 
-// Upload a WAV note and return its public URL. Path is timestamped so a
-// re-record never serves a stale cached file.
+// Map a recorded blob's MIME type to a file extension for storage.
+export function extFromMime(mime: string): string {
+  if (!mime) return "webm";
+  if (mime.includes("wav")) return "wav";
+  if (mime.includes("mp4") || mime.includes("m4a") || mime.includes("aac"))
+    return "mp4";
+  if (mime.includes("ogg")) return "ogg";
+  if (mime.includes("mpeg") || mime.includes("mp3")) return "mp3";
+  return "webm";
+}
+
+// Upload a note and return its public URL. Path is timestamped so a re-record
+// never serves a stale cached file.
 export async function uploadPhraseAudio(
   phraseId: string,
   lang: "shona" | "setswana",
-  wav: Blob
+  blob: Blob,
+  ext: string = "wav",
+  contentType: string = "audio/wav"
 ): Promise<string> {
-  const path = `${phraseId}/${lang}-${Date.now()}.wav`;
+  const path = `${phraseId}/${lang}-${Date.now()}.${ext}`;
   const { error } = await supabase.storage
     .from(AUDIO_BUCKET)
-    .upload(path, wav, { contentType: "audio/wav", upsert: true });
+    .upload(path, blob, {
+      contentType: contentType || blob.type || "application/octet-stream",
+      upsert: true,
+    });
   if (error) throw error;
   const { data } = supabase.storage.from(AUDIO_BUCKET).getPublicUrl(path);
   return data.publicUrl;
