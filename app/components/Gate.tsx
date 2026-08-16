@@ -26,10 +26,10 @@ export default function Gate({
   return (
     <main className="min-h-dvh grid place-items-center p-6">
       <div className="w-full max-w-sm text-center">
-        <div className="font-display text-5xl font-black text-cocoa">
+        <div className="font-display text-5xl font-black text-ink">
           Phrase<span className="text-ochre">Duel</span>
         </div>
-        <p className="mt-2 text-cocoa/70">
+        <p className="mt-2 text-ink/70">
           Enter your household passcode to join the duel.
         </p>
         <form onSubmit={submit} className="mt-7">
@@ -39,7 +39,7 @@ export default function Gate({
             inputMode="numeric"
             autoFocus
             placeholder="passcode"
-            className={`w-full rounded-2xl border-2 border-ochre/30 bg-white/80 px-5 py-4 text-center text-2xl tracking-widest text-cocoa outline-none focus:border-ochre ${
+            className={`w-full rounded-2xl border-2 border-ochre/30 bg-surface/80 px-5 py-4 text-center text-2xl tracking-widest text-ink outline-none focus:border-ochre ${
               shake ? "animate-[floatup_0s] border-berry" : ""
             }`}
             style={shake ? { animation: "popin 0.4s" } : undefined}

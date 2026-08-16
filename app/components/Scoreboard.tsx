@@ -129,19 +129,19 @@ export default function Scoreboard({
   return (
     <div className="space-y-4">
       {/* Streak + leader banner */}
-      <div className="flex items-center justify-between rounded-2xl bg-white/70 px-4 py-3 shadow-card">
+      <div className="flex items-center justify-between rounded-2xl bg-surface/70 px-4 py-3 shadow-card">
         <div>
-          <div className="text-xs uppercase tracking-wide text-cocoa/50">
+          <div className="text-xs uppercase tracking-wide text-ink/50">
             Today
           </div>
-          <div className="font-semibold text-cocoa">{leaderText}</div>
+          <div className="font-semibold text-ink">{leaderText}</div>
         </div>
         <div className="flex items-center gap-1 rounded-full bg-sun/20 px-3 py-1.5">
           <span className="text-lg">🔥</span>
           <span className="font-display text-xl font-bold text-clay">
             {hh.streak}
           </span>
-          <span className="text-xs font-semibold text-cocoa/60">day{hh.streak === 1 ? "" : "s"}</span>
+          <span className="text-xs font-semibold text-ink/60">day{hh.streak === 1 ? "" : "s"}</span>
         </div>
       </div>
 
@@ -151,7 +151,7 @@ export default function Scoreboard({
         <PlayerCard store={store} player={2} online={presence.p2Online} />
       </div>
 
-      <p className="px-1 text-center text-xs text-cocoa/50">
+      <p className="px-1 text-center text-xs text-ink/50">
         Tap <b>Used it</b> for saying a phrase unprompted, <b>Taught it</b> for a
         clear lesson.
       </p>

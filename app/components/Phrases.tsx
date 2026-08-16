@@ -26,24 +26,24 @@ function PhraseRow({
 
   if (editing) {
     return (
-      <div className="rounded-2xl bg-white/80 p-4 shadow-card">
+      <div className="rounded-2xl bg-surface/80 p-4 shadow-card">
         <input
           value={english}
           onChange={(e) => setEnglish(e.target.value)}
           placeholder="English"
-          className="w-full rounded-lg border border-cocoa/15 bg-cream/60 px-3 py-2 font-display text-lg text-cocoa outline-none focus:border-ochre"
+          className="w-full rounded-lg border border-hair/15 bg-field px-3 py-2 font-display text-lg text-ink outline-none focus:border-ochre"
         />
         <input
           value={shona}
           onChange={(e) => setShona(e.target.value)}
           placeholder="Shona"
-          className="mt-2 w-full rounded-lg border border-cocoa/15 bg-cream/60 px-3 py-2 outline-none focus:border-ochre"
+          className="mt-2 w-full rounded-lg border border-hair/15 bg-field px-3 py-2 outline-none focus:border-ochre"
         />
         <input
           value={setswana}
           onChange={(e) => setSetswana(e.target.value)}
           placeholder="Setswana"
-          className="mt-2 w-full rounded-lg border border-cocoa/15 bg-cream/60 px-3 py-2 outline-none focus:border-ochre"
+          className="mt-2 w-full rounded-lg border border-hair/15 bg-field px-3 py-2 outline-none focus:border-ochre"
         />
         <div className="mt-3 flex gap-2">
           <button
@@ -54,7 +54,7 @@ function PhraseRow({
           </button>
           <button
             onClick={() => setEditing(false)}
-            className="rounded-lg border border-cocoa/20 px-4 py-2 text-sm font-semibold text-cocoa/70"
+            className="rounded-lg border border-hair/20 px-4 py-2 text-sm font-semibold text-ink/70"
           >
             Cancel
           </button>
@@ -64,19 +64,19 @@ function PhraseRow({
   }
 
   return (
-    <div className="rounded-2xl bg-white/70 p-4 shadow-card">
+    <div className="rounded-2xl bg-surface/70 p-4 shadow-card">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <div className="font-display text-lg font-semibold text-cocoa">
+          <div className="font-display text-lg font-semibold text-ink">
             {phrase.english}
           </div>
           <div className="mt-1 text-sm">
             <span className="font-semibold text-clay">Shona:</span>{" "}
-            <span className="text-cocoa/80">{phrase.shona || "—"}</span>
+            <span className="text-ink/80">{phrase.shona || "—"}</span>
           </div>
           <div className="text-sm">
             <span className="font-semibold text-leaf">Setswana:</span>{" "}
-            <span className="text-cocoa/80">{phrase.setswana || "—"}</span>
+            <span className="text-ink/80">{phrase.setswana || "—"}</span>
           </div>
         </div>
         <div className="flex shrink-0 flex-col gap-1">
@@ -98,7 +98,7 @@ function PhraseRow({
       </div>
 
       {/* Voice notes for each language */}
-      <div className="mt-3 border-t border-cocoa/10 pt-2">
+      <div className="mt-3 border-t border-hair/10 pt-2">
         <VoiceNote
           phraseId={phrase.id}
           lang="shona"
@@ -140,30 +140,30 @@ export default function Phrases({ store }: { store: Store }) {
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between px-1">
-        <h2 className="font-display text-2xl font-bold text-cocoa">Phrases</h2>
-        <span className="text-sm text-cocoa/50">{store.phrases.length} total</span>
+        <h2 className="font-display text-2xl font-bold text-ink">Phrases</h2>
+        <span className="text-sm text-ink/50">{store.phrases.length} total</span>
       </div>
 
       {adding ? (
-        <div className="rounded-2xl bg-white/80 p-4 shadow-card animate-popin">
+        <div className="rounded-2xl bg-surface/80 p-4 shadow-card animate-popin">
           <input
             value={english}
             onChange={(e) => setEnglish(e.target.value)}
             placeholder="English sentence"
             autoFocus
-            className="w-full rounded-lg border border-cocoa/15 bg-cream/60 px-3 py-2 font-display text-lg text-cocoa outline-none focus:border-ochre"
+            className="w-full rounded-lg border border-hair/15 bg-field px-3 py-2 font-display text-lg text-ink outline-none focus:border-ochre"
           />
           <input
             value={shona}
             onChange={(e) => setShona(e.target.value)}
             placeholder="Shona translation"
-            className="mt-2 w-full rounded-lg border border-cocoa/15 bg-cream/60 px-3 py-2 outline-none focus:border-ochre"
+            className="mt-2 w-full rounded-lg border border-hair/15 bg-field px-3 py-2 outline-none focus:border-ochre"
           />
           <input
             value={setswana}
             onChange={(e) => setSetswana(e.target.value)}
             placeholder="Setswana translation"
-            className="mt-2 w-full rounded-lg border border-cocoa/15 bg-cream/60 px-3 py-2 outline-none focus:border-ochre"
+            className="mt-2 w-full rounded-lg border border-hair/15 bg-field px-3 py-2 outline-none focus:border-ochre"
           />
           <div className="mt-3 flex gap-2">
             <button
@@ -174,7 +174,7 @@ export default function Phrases({ store }: { store: Store }) {
             </button>
             <button
               onClick={() => setAdding(false)}
-              className="rounded-lg border border-cocoa/20 px-4 py-2 text-sm font-semibold text-cocoa/70"
+              className="rounded-lg border border-hair/20 px-4 py-2 text-sm font-semibold text-ink/70"
             >
               Cancel
             </button>
@@ -194,7 +194,7 @@ export default function Phrases({ store }: { store: Store }) {
           <PhraseRow key={p.id} store={store} phrase={p} />
         ))}
         {store.phrases.length === 0 && (
-          <p className="py-8 text-center text-sm text-cocoa/50">
+          <p className="py-8 text-center text-sm text-ink/50">
             No phrases yet — add your first one above.
           </p>
         )}

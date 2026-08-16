@@ -1,7 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { blobToWav, uploadPhraseAudio, deletePhraseAudioByUrl } from "../lib/audio";
+import {
+  blobToWav,
+  uploadPhraseAudio,
+  deletePhraseAudioByUrl,
+  extFromMime,
+} from "../lib/audio";
 
 type Status = "idle" | "recording" | "processing";
 
@@ -50,13 +55,40 @@ export default function VoiceNote({
           const raw = new Blob(chunksRef.current, {
             type: rec.mimeType || "audio/webm",
           });
-          const wav = await blobToWav(raw);
-          const publicUrl = await uploadPhraseAudio(phraseId, lang, wav);
+
+          // Prefer converting to WAV (plays on every phone). If the browser
+          // can't decode the recording, fall back to uploading it as-is so
+          // saving never fails — it still plays back on the same phone type.
+          let toUpload: Blob = raw;
+          let ext = extFromMime(raw.type);
+          let contentType = raw.type || "audio/webm";
+          try {
+            toUpload = await blobToWav(raw);
+            ext = "wav";
+            contentType = "audio/wav";
+          } catch (convErr) {
+            console.warn(
+              "WAV conversion failed; uploading original format instead.",
+              convErr
+            );
+          }
+
+          const publicUrl = await uploadPhraseAudio(
+            phraseId,
+            lang,
+            toUpload,
+            ext,
+            contentType
+          );
           // Remove the previous file (best effort) once the new one is saved.
           if (url) deletePhraseAudioByUrl(url).catch(() => {});
           onSave(publicUrl);
         } catch (e: any) {
-          setErr("Couldn't save recording.");
+          // Surface the real reason — usually a missing storage bucket/policy
+          // (run supabase/migration-voice-notes.sql).
+          const msg = e?.message || e?.error_description || String(e);
+          console.error("Voice note save failed:", e);
+          setErr(msg.slice(0, 120));
         } finally {
           setStatus("idle");
           setSeconds(0);
@@ -119,7 +151,7 @@ export default function VoiceNote({
           Stop · {seconds}s
         </button>
       ) : status === "processing" ? (
-        <span className="rounded-full bg-cocoa/10 px-3 py-1.5 text-xs font-semibold text-cocoa/60">
+        <span className="rounded-full bg-cocoa/10 px-3 py-1.5 text-xs font-semibold text-ink/60">
           Saving…
         </span>
       ) : url ? (
@@ -132,7 +164,7 @@ export default function VoiceNote({
           </button>
           <button
             onClick={startRecording}
-            className="rounded-full border border-cocoa/20 px-2.5 py-1.5 text-xs font-semibold text-cocoa/60 active:translate-y-0.5"
+            className="rounded-full border border-hair/20 px-2.5 py-1.5 text-xs font-semibold text-ink/60 active:translate-y-0.5"
             title="Re-record"
           >
             ↻

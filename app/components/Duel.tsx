@@ -33,7 +33,7 @@ export default function Duel({ store }: { store: Store }) {
   if (phrases.length === 0) {
     return (
       <div className="grid place-items-center py-16 text-center">
-        <p className="text-cocoa/60">
+        <p className="text-ink/60">
           Add a few phrases first, then come back to duel!
         </p>
       </div>
@@ -55,8 +55,8 @@ export default function Duel({ store }: { store: Store }) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between px-1">
-        <h2 className="font-display text-2xl font-bold text-cocoa">Duel</h2>
-        <span className="text-sm text-cocoa/50">Round {round}</span>
+        <h2 className="font-display text-2xl font-bold text-ink">Duel</h2>
+        <span className="text-sm text-ink/50">Round {round}</span>
       </div>
 
       <div className="flex justify-between gap-3 text-center text-cream">
@@ -118,7 +118,7 @@ export default function Duel({ store }: { store: Store }) {
             <PlayButton url={current?.shona_audio ?? null} label="Shona" />
             <PlayButton url={current?.setswana_audio ?? null} label="Setswana" />
           </div>
-          <p className="text-center text-sm font-semibold text-cocoa/70">
+          <p className="text-center text-sm font-semibold text-ink/70">
             Who got it right?
           </p>
           <div className="flex gap-3">
@@ -137,13 +137,13 @@ export default function Duel({ store }: { store: Store }) {
           </div>
           <button
             onClick={next}
-            className="w-full rounded-2xl border border-cocoa/20 py-2.5 text-sm font-semibold text-cocoa/70 active:translate-y-0.5"
+            className="w-full rounded-2xl border border-hair/20 py-2.5 text-sm font-semibold text-ink/70 active:translate-y-0.5"
           >
             Skip / nobody
           </button>
         </div>
       ) : (
-        <p className="text-center text-sm text-cocoa/50">
+        <p className="text-center text-sm text-ink/50">
           Say both translations out loud, then reveal to check.
         </p>
       )}

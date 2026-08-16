@@ -12,10 +12,10 @@ export default function MeChooser({
   return (
     <main className="min-h-dvh grid place-items-center p-6">
       <div className="w-full max-w-sm text-center">
-        <div className="font-display text-4xl font-black text-cocoa">
+        <div className="font-display text-4xl font-black text-ink">
           Who&apos;s holding this phone?
         </div>
-        <p className="mt-2 text-cocoa/70">
+        <p className="mt-2 text-ink/70">
           So we can tell when you&apos;re both on together.
         </p>
         <div className="mt-7 grid gap-3">
@@ -38,7 +38,7 @@ export default function MeChooser({
             </span>
           </button>
         </div>
-        <p className="mt-4 text-xs text-cocoa/40">
+        <p className="mt-4 text-xs text-ink/40">
           You can switch this later in Settings.
         </p>
       </div>

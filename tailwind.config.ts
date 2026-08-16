@@ -1,11 +1,12 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: ["./app/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
-        // Warm, southern-African-inspired palette
+        // Fixed accent palette (same in both themes)
         cream: "#F7EFE2",
         sand: "#EDE0CC",
         ochre: "#C8821E",
@@ -15,6 +16,11 @@ const config: Config = {
         bark: "#3E2615",
         leaf: "#5E7A4B",
         berry: "#9B3B2E",
+        // Theme-aware semantic tokens (flip via CSS variables)
+        ink: "rgb(var(--ink) / <alpha-value>)",
+        surface: "rgb(var(--surface) / <alpha-value>)",
+        field: "rgb(var(--field) / <alpha-value>)",
+        hair: "rgb(var(--hair) / <alpha-value>)",
       },
       fontFamily: {
         display: ["var(--font-fraunces)", "Georgia", "serif"],

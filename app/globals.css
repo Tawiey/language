@@ -4,6 +4,18 @@
 
 :root {
   color-scheme: light;
+  --ink: 62 38 21; /* cocoa — primary text */
+  --surface: 255 255 255; /* card base (used with opacity) */
+  --field: 247 239 226; /* input fill */
+  --hair: 62 38 21; /* hairline borders */
+}
+
+.dark {
+  color-scheme: dark;
+  --ink: 237 224 205; /* warm cream — primary text */
+  --surface: 43 30 19; /* panel */
+  --field: 32 23 14; /* input fill */
+  --hair: 237 224 205;
 }
 
 html,
@@ -12,16 +24,31 @@ body {
 }
 
 body {
-  background-color: #F7EFE2;
+  background-color: #f7efe2;
   background-image: radial-gradient(
       circle at 15% -10%,
       rgba(232, 162, 61, 0.18),
       transparent 45%
     ),
     radial-gradient(circle at 110% 10%, rgba(168, 83, 30, 0.16), transparent 40%);
-  color: #3E2615;
+  color: rgb(var(--ink));
   -webkit-font-smoothing: antialiased;
   overscroll-behavior-y: none;
+}
+
+.dark body {
+  background-color: #17110b;
+  background-image: radial-gradient(
+      circle at 15% -10%,
+      rgba(232, 162, 61, 0.14),
+      transparent 45%
+    ),
+    radial-gradient(circle at 110% 10%, rgba(168, 83, 30, 0.16), transparent 42%);
+}
+
+/* Placeholder legibility in dark mode */
+.dark input::placeholder {
+  color: rgb(var(--ink) / 0.4);
 }
 
 /* Respect iOS safe areas for the bottom tab bar */

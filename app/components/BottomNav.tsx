@@ -45,7 +45,7 @@ export default function BottomNav({
   return (
     <nav className="safe-bottom fixed inset-x-0 bottom-0 z-20">
       <div className="mx-auto max-w-md px-3 pt-2">
-        <div className="flex items-center justify-around rounded-3xl border border-cocoa/10 bg-cream/95 px-2 py-2 shadow-card backdrop-blur">
+        <div className="flex items-center justify-around rounded-3xl border border-hair/10 bg-surface/95 px-2 py-2 shadow-card backdrop-blur">
           {items.map((it) => {
             const active = tab === it.key;
             return (
@@ -53,7 +53,7 @@ export default function BottomNav({
                 key={it.key}
                 onClick={() => setTab(it.key)}
                 className={`relative flex flex-1 flex-col items-center gap-0.5 rounded-2xl py-1.5 transition-colors ${
-                  active ? "text-ochre" : "text-cocoa/45"
+                  active ? "text-ochre" : "text-ink/45"
                 }`}
               >
                 <svg
